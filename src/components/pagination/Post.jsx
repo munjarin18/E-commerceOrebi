@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import { apiData } from '../ContextApi'
 import { TfiReload } from "react-icons/tfi";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";

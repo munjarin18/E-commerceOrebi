@@ -9,7 +9,7 @@ let apiData = createContext()
 const ContextApi = ({ children }) => {
     let [info,setInfo] = useState([])
 
-    let getData = ()=> axios.get("https://dummyjson.com/product").then((response)=>{
+    let getData = ()=> axios.get("https://dummyjson.com/product?limit=90").then((response)=>{
         setInfo(response.data.products);
     })
     

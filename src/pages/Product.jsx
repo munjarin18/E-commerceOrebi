@@ -11,7 +11,7 @@ import PaginationArea from '../components/pagination/PaginationArea';
 const Product = () => {
   let data = useContext(apiData)
   let [currentPage, setCurrentPage] = useState(1)
-  let [perPage, setPerPage] = useState(6)
+  let [perPage, setPerPage] = useState(9)
   let lastPage = currentPage * perPage
   let firstPage = lastPage - perPage
 
@@ -26,6 +26,23 @@ const Product = () => {
    let paginate = (pageNumber) =>{
     setCurrentPage(pageNumber + 1);
    }  
+
+
+   let next = () => {
+    if( currentPage < pageNumber.length ){
+       
+      setCurrentPage ((state)  => state + 1)
+    }
+
+   }
+
+   let prev = () => {
+    if( currentPage > 1 ){
+      setCurrentPage ((state)  => state - 1)
+    }
+   
+   }
+
 
   return (
     <section>
@@ -42,7 +59,7 @@ const Product = () => {
             </div>
             <div className=" text-end">
 
-              <PaginationArea pageNumber={pageNumber} paginate={paginate} currentPage={currentPage} />
+             <PaginationArea pageNumber={pageNumber} paginate={paginate} currentPage={currentPage} next={next} prev={prev} allData={allData}  /> 
 
             </div>
           </div>
