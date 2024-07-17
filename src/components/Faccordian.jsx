@@ -12,7 +12,7 @@ const Faccordian = () => {
 <div
  onClick={()=> setShow(!show)}
 className=" flex justify-between items-center">
-<p className='text-[#000] font-sans text-[18px] lg:text-[18px] font-bold'>
+<p className='text-[#000] font-sans  lg:pl-0 pl-2 text-[13px] lg:text-[18px] font-bold'>
   LFEATURES  & DETAILS
 </p>
 {show == true ? <RxCross2 /> : <FaPlus />  }
@@ -20,7 +20,7 @@ className=" flex justify-between items-center">
 
 </div>
 {show &&
-<p className='text-[#000] pt-6 font-sans text-[18px] lg:text-[18px] font-bold'>
+<p className='text-[#000] pt-6 font-sans  lg:pl-0 pl-2 text-[13px] lg:text-[18px] font-bold'>
 SHIPPING & RETURNS 
 </p>
 
@@ -28,8 +28,8 @@ SHIPPING & RETURNS
 
 </div>
 
-<div className="w-[50%] pt-8">
-  <span className='text-[#767676]  font-sans text-[18px] lg:text-[18px] font-normal' >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+<div className="lg:w-[50%] pt-8 lg:pl-0 pl-2">
+  <span className='text-[#767676]  font-sans text-[13px] lg:text-[18px] font-normal'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 </span>
 </div>
  

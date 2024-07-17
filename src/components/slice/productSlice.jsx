@@ -3,18 +3,29 @@ import { createSlice } from '@reduxjs/toolkit'
 export const productSlice = createSlice({
   name: 'product',
   initialState: {
-    cartItem: [],
+    cartItem: localStorage.getItem("cart")? JSON.parse(localStorage.getItem("cart")) : [],
   },
   reducers: {
     addTocart: (state,action) => {
      let findProduct = state.cartItem.findIndex((item)=> item.id == action.payload.id)
-     console.log(findProduct);
+     
+     if(findProduct !== -1){
+      state.cartItem[findProduct].qun +=1
+      localStorage.setItem("cart",JSON.stringify(state.cartItem))
+     }else{
+      state.cartItem =[...state.cartItem, action.payload]
+       localStorage.setItem("cart",JSON.stringify(state.cartItem))
+     }
     },
+    
+    productIncrement:(state,action)=>{
+     state.cartItem[action.payload].qun += 1
+    }
 
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { addTocart } = productSlice.actions
+export const { addTocart,productIncrement } = productSlice.actions
 
 export default productSlice.reducer 

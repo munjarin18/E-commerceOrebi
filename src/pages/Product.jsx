@@ -51,13 +51,13 @@ const Product = () => {
           <div className="w-[20%]">
             category
           </div>
-          <div className="w-[80%]">
-            <div className="flex justify-between flex-wrap">
+          <div className="lg:w-[80%] ">
+            <div className="lg:flex justify-between flex-wrap pl-10">
 
               <Post allData={allData} />
 
             </div>
-            <div className=" text-end">
+            <div className="text-end">
 
              <PaginationArea pageNumber={pageNumber} paginate={paginate} currentPage={currentPage} next={next} prev={prev} allData={allData}  /> 
 
