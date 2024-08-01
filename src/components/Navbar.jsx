@@ -147,7 +147,7 @@ const Navbar = () => {
             <a className='w-[148px] h-[50px] border-2 border-[#262626]
             inline-block text-center leading-[50px] font-sans
             font-bold text-[14px]' href='#'>View Cart</a>
-        </div>
+        </div> 
         <div className="">
         <a className='w-[148px] h-[50px] border-2 text-white bg-[#262626]
             inline-block text-center leading-[50px] font-sans
