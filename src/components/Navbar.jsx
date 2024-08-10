@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Container from './Container'
 import Flex from './Flex'
 import { FaBars } from "react-icons/fa6";
@@ -6,6 +6,7 @@ import { FaSearch ,FaUserAlt ,FaShoppingCart } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import CartImg from "../assets/cart.png"
 import { RxCross2 } from "react-icons/rx";
+import { useSelector } from 'react-redux';
 
 
 
@@ -13,6 +14,7 @@ import { RxCross2 } from "react-icons/rx";
 
 
 const Navbar = () => {
+    let data = useSelector((state)=> state.product.cartItem)
     let [cartShow, setCartShow] = useState (false)
     let [usercartShow, setUsercartShow] = useState (false)
     let [userShow,setuserShow] = useState(false)
@@ -106,7 +108,14 @@ const Navbar = () => {
             <IoMdArrowDropdown />
             </div>
           <div ref={userref} className="">
-          <FaShoppingCart />
+            <div className="relative ">
+            <FaShoppingCart />
+            {data.length > 0 ? <div className="absolute content-[''] h-[22px] w-[22px] text-white bg-[#767676] left-[10px] top-[-15px] rounded-full text-center">
+            {data.length}
+            </div> : ""  } 
+        
+            </div>
+           
           </div>
            </div>
 
@@ -127,21 +136,20 @@ const Navbar = () => {
        <div className="py-3">
        <div className="flex justify-around items-center">
 
-<div className="">
-    <img src={CartImg} alt='cart'/>
-  </div>
-  <div className="font-sans font-bold text-[14px]">
+     <div className="">
+     <img src={CartImg} alt='cart'/>
+     </div>
+    <div className="font-sans font-bold text-[14px]">
     <h3 >Black Smart Watch</h3>
     <h5>$44.00</h5>
-  </div>
+    </div>
   <div className="">
   <RxCross2 />
   </div>
 </div>
 <div className="">
     <h3 className='pl-4 py-3 text-[#767676] font-sans
-                 font-bold text-[14px]'>Subtotal:<span className='text-[#262626] font-sans
-                 font-bold text-[14px] pl-2'>$44.00</span></h3>
+                 font-bold text-[14px]'>Subtotal:<span className='text-[#262626]font-sans font-bold text-[14px] pl-2'>$44.00</span></h3>
     <div className="flex justify-around">
         <div className="">
             <a className='w-[148px] h-[50px] border-2 border-[#262626]

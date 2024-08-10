@@ -10,12 +10,13 @@ const Header = () => {
 
    let [show,setShow] = useState(false)
 
+
   return (
   <header className='lg:h-[80px] h-[20px]'>
- <Container>
+  <Container>
   <Flex className="justify-between items-center lg:h-[80px] h-[20px]">
 
-  <div className="w-1/4">
+     <div className="w-1/4">
       <img src={Logo} alt='logo'/>
      </div>
      <div className="w-3/4">
