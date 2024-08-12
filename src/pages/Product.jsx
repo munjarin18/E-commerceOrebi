@@ -1,12 +1,18 @@
 
 import React, { useContext, useEffect, useState } from 'react'
 import Container from '../components/Container'
-import Flex from '../components/Flex'
 import { apiData } from '../components/ContextApi'
 import Post from '../components/pagination/Post';
 import PaginationArea from '../components/pagination/PaginationArea';
 import { FaCaretUp } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
+import { FaThList } from "react-icons/fa";
+import { AiFillLayout } from "react-icons/ai";
+
+
+
+
+
 
 
 
@@ -61,7 +67,8 @@ console.log(category);
   setCategorySearchFilter(categoryFilter)
 }
 
-console.log(categorySearchFilter);
+
+
 
 
   return (
@@ -82,9 +89,17 @@ console.log(categorySearchFilter);
             </div>
           </div>
           <div className="lg:w-[80%] w-full ">
-            <div className="lg:flex justify-between flex-wrap pl-10">
+            <div>
+              <FaThList />
+              <AiFillLayout />
 
-              <Post allData={allData} categorySearchFilter={categorySearchFilter} />
+
+
+
+            </div>
+        
+            <div className="lg:flex justify-between flex-wrap  pl-10">
+              <Post allData={allData} categorySearchFilter={categorySearchFilter}  />
 
             </div>
             <div className="text-end">
