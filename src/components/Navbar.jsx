@@ -7,23 +7,29 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import CartImg from "../assets/cart.png"
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from 'react-redux';
-
+import { apiData } from './ContextApi';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 
 
 
 const Navbar = () => {
+    let info = useContext(apiData)
     let data = useSelector((state)=> state.product.cartItem)
     let [cartShow, setCartShow] = useState (false)
     let [usercartShow, setUsercartShow] = useState (false)
     let [userShow,setuserShow] = useState(false)
+    let [searchInput, setSearchInput] = useState('')
+    let [searchFilter, setSearchFilter] = useState([])
+    const [focusedIndex, setFocusedIndex] = useState(-1);
     let cartref = useRef()
     let userref = useRef()
     let userAcref = useRef()
+    let navigate = useNavigate()
 
 
-    console.log(cartref);
 
 
     useEffect (()=>{
@@ -54,6 +60,41 @@ const Navbar = () => {
         })
 
             },[cartShow ,usercartShow, userShow])
+
+   let handleInput = (e) =>{
+    setSearchInput(e.target.value);
+    if(e.target.value == ""){
+      setSearchFilter([])
+    }else{
+      let searchone = info.filter((item)=>item.title.toLowerCase().includes(e.target.value))
+      setSearchFilter(searchone);
+    }
+
+   }    
+
+  let handleSingleSearch = (id) =>{
+    navigate(`/product/${id}`)
+    setSearchFilter([])
+    setSearchInput("")
+    
+  }
+   
+  let handleKey = (e) => {
+    if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setFocusedIndex((prevIndex) => (prevIndex < searchFilter.length - 1 ? prevIndex + 1 : 0));
+    } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setFocusedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : searchFilter.length - 1));
+    } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (focusedIndex >= 0 && focusedIndex < searchFilter.length) {
+            handleSingleSearch(searchFilter[focusedIndex].id);
+        }
+    }
+};
+
+   
 
 
   return (
@@ -92,14 +133,37 @@ const Navbar = () => {
           </div>
 
           <div className="w-[40%]">
-            <div className="relative">
-                <input placeholder='Search Products...' type='search'
-                 className='w-full lg:h-[50px] border-2 border-[#262626] outline-none px-2'/>
-                <div className="absolute top-[50%] lg:right-5 right-0 sm:right-2 translate-y-[-50%] ">
-                <FaSearch />
-                </div>
-            </div>
-          </div>
+                        <div className="relative">
+                            <input
+                                value={searchInput}
+                                onKeyDown={handleKey}
+                                onChange={handleInput}
+                                placeholder='Search Products...'
+                                type='search'
+                                className='w-full lg:h-[50px] border-2 border-[#262626] outline-none px-2'
+                            />
+                            <div className="absolute top-[50%] lg:right-5 right-0 sm:right-2 translate-y-[-50%]">
+                                <FaSearch />
+                            </div>
+                            {searchFilter.length > 0 &&
+                                <div className="w-[500px] h-[400px] overflow-y-scroll absolute z-50 bg-[#F0F0F0] top-[50px] left-0">
+                                    {searchFilter.map((item, index) => (
+                                       <div key={item.id} className={`py-3 ${index === focusedIndex ? 'bg-[#e0e0e0]' : ''}`}>
+                                            <div onClick={() => handleSingleSearch(item.id)} className="flex justify-around items-center">
+                                                <div className="">
+                                                    <img className='w-[100px] h-[100px]' src={item.thumbnail} alt='cart'/>
+                                                </div>
+                                                <div className="font-sans font-bold text-[14px]">
+                                                    <h3>{item.title}</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            }
+                        </div>
+                    </div>
+
         
           <div className="w-[30%] relative ">
            <div className="flex justify-end items-center gap-x-2"> 
@@ -131,39 +195,41 @@ const Navbar = () => {
 
            {usercartShow &&
 
-          <div className="w-[360px] absolute  z-50  bg-[#F0F0F0] top-[50px] right-0">
-
-       <div className="py-3">
+       <div className="w-[360px] absolute  z-50  bg-[#F0F0F0] top-[50px] right-0">
+          {data.map((item)=>(
+          <div className="py-3">
        <div className="flex justify-around items-center">
 
-     <div className="">
-     <img src={CartImg} alt='cart'/>
-     </div>
-    <div className="font-sans font-bold text-[14px]">
-    <h3 >Black Smart Watch</h3>
-    <h5>$44.00</h5>
-    </div>
-  <div className="">
-  <RxCross2 />
-  </div>
-</div>
-<div className="">
-    <h3 className='pl-4 py-3 text-[#767676] font-sans
-                 font-bold text-[14px]'>Subtotal:<span className='text-[#262626]font-sans font-bold text-[14px] pl-2'>$44.00</span></h3>
-    <div className="flex justify-around">
-        <div className="">
-            <a className='w-[148px] h-[50px] border-2 border-[#262626]
-            inline-block text-center leading-[50px] font-sans
-            font-bold text-[14px]' href='#'>View Cart</a>
-        </div> 
-        <div className="">
-        <a className='w-[148px] h-[50px] border-2 text-white bg-[#262626]
-            inline-block text-center leading-[50px] font-sans
-            font-bold text-[14px]' href='#'>Checkout</a>
-        </div>
-    </div>
-</div>
+       <div className="">
+       <img className='w-[50px] h-[50px]' src={item.thumbnail} alt='cart'/>
        </div>
+       <div className="font-sans font-bold text-[14px]">
+       <h3 >{item.title}</h3>
+       <h5>${item.price}</h5>
+       </div>
+       <div className="">
+       <RxCross2 />
+       </div>
+       </div>
+       <div className="">
+       <h3 className='pl-4 py-3 text-[#767676] font-sans
+           font-bold text-[14px]'>Subtotal:<span className='text-[#262626]font-sans font-bold text-[14px] pl-2'>$44.00</span></h3>
+       <div className="flex justify-around">
+       <div className="">
+        <Link to ="/Cart" className='w-[148px] h-[50px] border-2 border-[#262626]
+       inline-block text-center leading-[50px] font-sans
+       font-bold text-[14px]'>View Cart</Link>
+       </div> 
+       <div className="">
+       <a className='w-[148px] h-[50px] border-2 text-white bg-[#262626]
+       inline-block text-center leading-[50px] font-sans
+       font-bold text-[14px]' href='#'>Checkout</a>
+          </div>
+          </div>
+          </div>
+          </div>
+        ))}
+      
             
           </div>
            }
