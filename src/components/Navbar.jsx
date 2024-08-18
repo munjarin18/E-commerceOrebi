@@ -186,9 +186,15 @@ const Navbar = () => {
            {userShow &&
                   <div className="absolute z-50 top-[30px] right-0 lg:w-[300px] w-[120px] bg-[#262626] py-3 px-6">
                     <ul className='font-sans text-[16px] font-normal text-[#FFFFFFB2]'>
-                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>My Account</li>
-                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>Log in</li>
-                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>Sign Up</li>
+                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>
+                        <Link to="/MyAccount">My Account</Link>
+                      </li>
+                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>
+                        <Link to="/Login">Log in</Link>
+                      </li>
+                      <li className='py-[16px] duration-300 ease-in-out hover:text-[#fff] hover:pl-[10px]'>
+                        <Link to="/Signup">Sign Up</Link>
+                      </li>
                     </ul>
                   </div>
                 }
@@ -223,7 +229,9 @@ const Navbar = () => {
        <div className="">
        <a className='w-[148px] h-[50px] border-2 text-white bg-[#262626]
        inline-block text-center leading-[50px] font-sans
-       font-bold text-[14px]' href='#'>Checkout</a>
+       font-bold text-[14px]' href='#'>
+        <Link to="/Checkout">Checkout</Link>
+       </a>
           </div>
           </div>
           </div>
