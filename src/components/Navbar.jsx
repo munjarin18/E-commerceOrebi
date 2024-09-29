@@ -126,7 +126,7 @@ const Navbar = () => {
                     <li className='text-[rgba(255,255,255,0.7)] font-sans text-[16px]
                     py-2 duration-300 ease-in-out pl-3 hover:pl-6'>Home appliances</li>
                     
-                    
+                     
                 </ul>
             </div>
             }
@@ -143,7 +143,7 @@ const Navbar = () => {
                                 className='w-full lg:h-[50px] border-2 border-[#262626] outline-none px-2'
                             />
                             <div className="absolute top-[50%] lg:right-5 right-0 sm:right-2 translate-y-[-50%]">
-                                <FaSearch />
+                            <FaSearch />
                             </div>
                             {searchFilter.length > 0 &&
                                 <div className="w-[500px] h-[400px] overflow-y-scroll absolute z-50 bg-[#F0F0F0] top-[50px] left-0">
